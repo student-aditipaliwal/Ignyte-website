@@ -1,10 +1,37 @@
 
-import React from 'react';
+import React, {useState} from 'react';
 import design1 from "../images/Feature1.png";
 import design2 from "../images/Feature2.png";
 import design3 from "../images/Feature3.png";
 
 const Contact = () => {
+  
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Perform name validation (allow only characters)
+    const nameRegex = /^[a-zA-Z]+$/;
+    if (!nameRegex.test(formData.name)) {
+      alert('Name should only contain characters. Please remove any numbers.');
+      return;
+    }
+
+  };
+  
   return (
     <div id="Contact" className="min-h-screen w-full flex items-center justify-center bg-gradient-to-r from-white via-white to-#97bdfc">
       <div className="bg-gray-200 rounded shadow-md max-w-5xl w-full md:flex-row flex flex-col py-8 md:py-20 px-4 md:px-20">
@@ -16,7 +43,7 @@ const Contact = () => {
 
         <div className="flex-grow">
           <h2 className="text-2xl font-semibold text-#1e1b4b mb-4">Contact Us</h2>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">
                 Name
@@ -25,8 +52,10 @@ const Contact = () => {
                 type="text"
                 id="name"
                 name="name"
+                value={formData.name}
                 className="w-full p-2 border border-gray-300 rounded"
                 placeholder="Your Name"
+                onChange={handleChange}
               />
             </div>
             <div className="mb-4">
