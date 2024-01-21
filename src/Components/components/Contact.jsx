@@ -31,6 +31,8 @@ const Contact = () => {
     }
 
   };
+
+  // Actual Code
   
   return (
     <div id="Contact" className="min-h-screen w-full flex items-center justify-center bg-gradient-to-r from-white via-white to-#97bdfc">
